@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Points on a map</title>
+	<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+	<script src="https://api.tiles.mapbox.com/mapbox-gl-js/v0.31.0/mapbox-gl.js"></script>
+	<link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.31.0/mapbox-gl.css' rel='stylesheet' />
+	<style>
+		body {
+			margin: 0;
+			padding: 0;
+		}
+		#map {
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			width: 100%;
+		}
+	</style>
+</head>
+<body>
+	<div id='map'></div>
+	<script>
+	mapboxgl.accessToken = 'pk.eyJ1IjoiY2FybHBzIiwiYSI6ImNqNmxhdTNsZjFvcWYyeHJ5Z3M0bnJzeHUifQ.KfiUWEfk83UZ6FVYfCw2pg';
+	var map = new mapboxgl.Map({
+	    container: 'map',
+	    style: 'mapbox://styles/carlps/cj6oa70001fy62rmzr2wjvhgo'
+	});
+	map.on('click', function(e) {
+		var features = map.queryRenderedFeatures(e.point, {
+			layers: ['chicago-parks']
+		});
+
+		if (!features.length) {
+			return;
+		}
+		
+		var feature = features[0];
+
+		var popup = new mapboxgl.Popup({ offset: [0,-15] })
+		  .setLngLat(feature.geometry.coordinates)
+		  .setHTML('<h3>' + feature.properties.title + '</h3><p>' + feature.properties.description + '</p>')
+		  .setLngLat(feature.geometry.coordinates)
+		  .addTo(map);
+	});
+	</script>
+</body>
+</html>

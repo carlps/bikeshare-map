@@ -1,0 +1,8 @@
+Environment Variables
+
+BS_DB = bikeshare database name
+BS_DB_HOST = hostname for bikeshare database
+PSQL_PORT = port for postgresql (probably 5432)
+MAPS_USER = postgres username with read access to BS_DB
+MAPS_USER_PW = postgres password for user MAPS_USER
+MAPBOX_ACCESS_TOKEN = API token for mapbox (assumed by mapbox SDK)
