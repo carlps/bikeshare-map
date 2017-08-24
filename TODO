@@ -1,6 +1,9 @@
 
 x1 - model station info
 x2 - info to geojson
- 3 - create dataset
- 4 - show map
- 5 - flask
+x3 - create dataset -- automated
+x4 - create tileset -- through studio
+x5 - creat style -- through studio
+x6 - show map
+ 7 - flask
+ 

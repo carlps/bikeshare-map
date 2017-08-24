@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>Points on a map</title>
+	<title>DC Bikes</title>
 	<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
 	<script src="https://api.tiles.mapbox.com/mapbox-gl-js/v0.31.0/mapbox-gl.js"></script>
 	<link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.31.0/mapbox-gl.css' rel='stylesheet' />
@@ -25,11 +25,11 @@
 	mapboxgl.accessToken = 'pk.eyJ1IjoiY2FybHBzIiwiYSI6ImNqNmxhdTNsZjFvcWYyeHJ5Z3M0bnJzeHUifQ.KfiUWEfk83UZ6FVYfCw2pg';
 	var map = new mapboxgl.Map({
 	    container: 'map',
-	    style: 'mapbox://styles/carlps/cj6oa70001fy62rmzr2wjvhgo'
+	    style: 'mapbox://styles/carlps/cj6qydf6v3xju2rpqsre0immg'
 	});
 	map.on('click', function(e) {
 		var features = map.queryRenderedFeatures(e.point, {
-			layers: ['chicago-parks']
+			layers: ['dc-bikeshare-stations']
 		});
 
 		if (!features.length) {
@@ -40,7 +40,7 @@
 
 		var popup = new mapboxgl.Popup({ offset: [0,-15] })
 		  .setLngLat(feature.geometry.coordinates)
-		  .setHTML('<h3>' + feature.properties.title + '</h3><p>' + feature.properties.description + '</p>')
+		  .setHTML('<h3>' + feature.properties.station_name + '</h3><p>Capacity: ' + feature.properties.capacity + '</p>')
 		  .setLngLat(feature.geometry.coordinates)
 		  .addTo(map);
 	});
