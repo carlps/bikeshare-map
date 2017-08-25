@@ -8,4 +8,6 @@ x6 - show map
 x7 - db view with latest info
 x8 - update dataset
  9 - flask
-    --jquery
+    x-jquery
+
+!!!!!!!!!!!!! THEIR DATA IS WRONG !!!!!!!!!!!!!!!!!!!!!!!!!!!!
