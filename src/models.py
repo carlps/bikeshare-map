@@ -26,7 +26,12 @@ class Station_Information(Base):
     def to_feature(self):
         ''' convert station_information object to a dict
             that is formatted as needed to load as a feature
-            in mapbox
+            in mapbox. Station_id is also included as a property
+            because feature ID is not upheld when loaded and then
+            read back from mapbox. So having it as a property as
+            well should guarantee we are able to reference online
+            back to db. Dynamic values are not included since they
+            need to be looked up during run.
         '''
         return {
                 "id": str(self.station_id),
@@ -36,9 +41,7 @@ class Station_Information(Base):
                     "coordinates": [float(self.lon), float(self.lat)]
                     },
                 "properties": {
-                    "station_name": self.station_name,
-                    "num_bikes_available": self.num_bikes_available,
-                    "num_docks_available": self.num_docks_available,
-                    "last_updated": self.dt_format(self.last_updated)
+                    "station_id": self.station_id,
+                    "station_name": self.station_name
                     }
                 }

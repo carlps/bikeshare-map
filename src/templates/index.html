@@ -43,11 +43,11 @@
 		var feature = features[0];
 
 		$.getJSON($SCRIPT_ROOT + '/_get_status',
-		  		{station_id: feature.id},
+		  		{station_id: feature.properties.station_id},
 		  		function(data) {
 		  			var popup = new mapboxgl.Popup({ offset: [0,-15] })
 				.setLngLat(feature.geometry.coordinates)
-				.setHTML('<h3>' + feature.properties.station_name + '</h3><p>' + data.bikes + ' bikes available.</p><p>' + data.docks + ' docks available.</p><p>Data last updated ' + data.tstmp + '</p>')
+				.setHTML('<h3>' + feature.properties.station_name + '</h3><p>' + data.bikes + ' bikes available.<br/>' + data.docks + ' docks available.<br/>Data last updated ' + data.tstmp + '</p>')
 				.setLngLat(feature.geometry.coordinates)
 				.addTo(map);
 		  		});

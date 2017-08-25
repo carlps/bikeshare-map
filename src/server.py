@@ -15,6 +15,7 @@ MAPBOX_ACCESS_KEY = environ['MAPBOX_PUBLIC_TOKEN']
 @app.route('/_get_status')
 def get_status():
     station_id = request.args.get('station_id', 0, int)
+    print(station_id)
     session = get_session()
     bikes_available, docks_available, last_updated = session\
         .query(Station_Information.num_bikes_available,
