@@ -4,6 +4,10 @@
 	<meta charset="utf-8">
 	<title>DC Bikes</title>
 	<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script type="text/javascript">
+		var $SCRIPT_ROOT = {{ request.script_root|tojson|safe}}
+	</script>
 	<script src="https://api.tiles.mapbox.com/mapbox-gl-js/v0.31.0/mapbox-gl.js"></script>
 	<link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.31.0/mapbox-gl.css' rel='stylesheet' />
 	<style>
@@ -22,10 +26,10 @@
 <body>
 	<div id='map'></div>
 	<script>
-	mapboxgl.accessToken = 'pk.eyJ1IjoiY2FybHBzIiwiYSI6ImNqNmxhdTNsZjFvcWYyeHJ5Z3M0bnJzeHUifQ.KfiUWEfk83UZ6FVYfCw2pg';
+	mapboxgl.accessToken = '{{ACCESS_KEY}}';
 	var map = new mapboxgl.Map({
 	    container: 'map',
-	    style: 'mapbox://styles/carlps/cj6qydf6v3xju2rpqsre0immg'
+	    style: '{{mapbox_url}}'
 	});
 	map.on('click', function(e) {
 		var features = map.queryRenderedFeatures(e.point, {
@@ -38,11 +42,17 @@
 		
 		var feature = features[0];
 
-		var popup = new mapboxgl.Popup({ offset: [0,-15] })
-		  .setLngLat(feature.geometry.coordinates)
-		  .setHTML('<h3>' + feature.properties.station_name + '</h3><p>Capacity: ' + feature.properties.capacity + '</p>')
-		  .setLngLat(feature.geometry.coordinates)
-		  .addTo(map);
+		$.getJSON($SCRIPT_ROOT + '/_get_status',
+		  		{station_id: feature.id},
+		  		function(data) {
+		  			var popup = new mapboxgl.Popup({ offset: [0,-15] })
+				.setLngLat(feature.geometry.coordinates)
+				.setHTML('<h3>' + feature.properties.station_name + '</h3><p>' + data.bikes + ' bikes available.</p><p>' + data.docks + ' docks available.</p><p>Data last updated ' + data.tstmp + '</p>')
+				.setLngLat(feature.geometry.coordinates)
+				.addTo(map);
+		  		});
+
+		
 	});
 	</script>
 </body>

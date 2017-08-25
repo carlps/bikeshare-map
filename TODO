@@ -5,5 +5,7 @@ x3 - create dataset -- automated
 x4 - create tileset -- through studio
 x5 - creat style -- through studio
 x6 - show map
- 7 - flask
- 
+x7 - db view with latest info
+x8 - update dataset
+ 9 - flask
+    --jquery
