@@ -6,3 +6,4 @@ PSQL_PORT = port for postgresql (probably 5432)
 MAPS_USER = postgres username with read access to BS_DB
 MAPS_USER_PW = postgres password for user MAPS_USER
 MAPBOX_ACCESS_TOKEN = API token for mapbox (assumed by mapbox SDK)
+MAPBOX_PUBLIC_TOKEN = Public API token to render map
