@@ -22,6 +22,7 @@ def get_session(echo=False):
     host = environ['BS_DB_HOST']
     port = environ['PSQL_PORT']
     db = environ['BS_DB']
+    db += '?sslrootcert=rds-combined-ca-bundle.pem&sslmode=require'
 
     engine = create_engine(f'postgres://{pg_user}:{pg_pw}@{host}:{port}/{db}',
                             echo=echo)
