@@ -32,3 +32,8 @@ def index():
     return render_template('index.html',
                            ACCESS_KEY=MAPBOX_ACCESS_KEY,
                            mapbox_url=mapbox_url)
+
+
+@app.route('/about')
+def about():
+    return render_template('about.html')

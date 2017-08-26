@@ -47,7 +47,7 @@
 		  		function(data) {
 		  			var popup = new mapboxgl.Popup({ offset: [0,-15] })
 				.setLngLat(feature.geometry.coordinates)
-				.setHTML('<h3>' + feature.properties.station_name + '</h3><p>' + data.bikes + ' bikes available.<br/>' + data.docks + ' docks available.<br/>Data last updated ' + data.tstmp + '</p>')
+				.setHTML('<h3>' + feature.properties.station_name + '</h3><p>' + data.bikes + ' bikes available.<br/>' + data.docks + ' docks available.<br/>Data last updated ' + data.tstmp + '</p><p><a href="/about">about</a>')
 				.setLngLat(feature.geometry.coordinates)
 				.addTo(map);
 		  		});
