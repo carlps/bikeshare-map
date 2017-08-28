@@ -21,7 +21,7 @@ class Station_Information(Base):
     last_updated = Column(DateTime)
 
     def dt_format(self, tstmp):
-        return tstmp.strftime('%b %d, %Y - %I:%M:%S %p')
+        return tstmp.strftime('%b %d, %Y - %I:%M:%S %p %Z')
 
     def to_feature(self):
         ''' convert station_information object to a dict

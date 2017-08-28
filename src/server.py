@@ -1,5 +1,6 @@
 ''' src.server '''
 from os import environ
+from datetime import timedelta
 
 from flask import Flask, request, render_template, jsonify
 
@@ -12,6 +13,14 @@ app.config.from_object(__name__)
 MAPBOX_ACCESS_KEY = environ['MAPBOX_PUBLIC_TOKEN']
 
 
+def get_tstmp_str_adj(tstmp):
+    ''' etl server is on UTC time.
+        So update timestamp and format string for output.
+        TODO: add timezone to dates in DB '''
+    tstmp = tstmp - timedelta(hours=4)
+    return tstmp.strftime('%b %d, %Y - %I:%M:%S %p EDT')
+
+
 @app.route('/_get_status')
 def get_status():
     station_id = request.args.get('station_id', 0, int)
@@ -22,7 +31,8 @@ def get_status():
                Station_Information.num_docks_available,
                Station_Information.last_updated)\
         .filter(Station_Information.station_id == station_id).first()
-    tstmp = last_updated.strftime('%b %d, %Y - %I:%M:%S %p')
+
+    tstmp = get_tstmp_str_adj(last_updated)
     return jsonify(bikes=bikes_available, docks=docks_available, tstmp=tstmp)
 
 
